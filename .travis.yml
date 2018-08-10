@@ -1,0 +1,18 @@
+sudo: required
+language: java
+jdk: oraclejdk8
+addons:
+ sonarcloud:
+   organization: gunavathisekar-github
+   token:
+     secure:596af6b71932dc0e3f41cbca74f054f94fdca185
+before_install:
+- chmod +x mvnw
+
+script:
+- "./mvnw clean install -B"
+- "./mvnw clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar"
+cache:
+ directories:
+ - "$HOME/.m2/repository"
+ - "$HOME/.sonar/cache"
